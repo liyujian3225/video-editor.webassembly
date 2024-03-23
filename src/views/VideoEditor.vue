@@ -173,7 +173,22 @@ window.onresize = () =>
   })();
 </script>
 
-<style lang="scss" scope>
+<style lang="scss" scoped>
+
+.video-editor-container {
+  width: calc(100% - 40px);
+  height: calc(100% - 40px);
+  border-radius: 20px;
+  background: #393f4a;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 0; right: 0;
+  margin: auto;
+}
+
 .info-container {
   position: fixed;
   top: 0;
@@ -182,25 +197,10 @@ window.onresize = () =>
   flex-direction: column;
   color: #efefef;
   font-size: 14px;
-
   .title {
     font-weight: bold;
     margin: 15px;
   }
-
-  div {
-    margin: 10px;
-  }
-}
-
-.video-editor-container {
-  height: calc(100% - 40px);
-  margin: 20px 0;
-  border-radius: 20px;
-  background: #1a1a1a;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
 }
 
 .controller-section {

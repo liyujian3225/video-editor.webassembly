@@ -1,26 +1,36 @@
 <template>
-  <!-- <video-editor></video-editor> -->
-  <router-view></router-view>
+  <el-watermark
+    :font="font"
+    :content="['视频剪辑', 'video editor']">
+    <div class="routerView">
+      <router-view></router-view>
+    </div>
+  </el-watermark>
 </template>
 
 <script setup>
+import { reactive, watch } from 'vue'
 import Store from "@/store";
-
-// 依赖注入
 Store.useProvider();
+
+const font = reactive({
+  color: 'rgba(255, 255, 255, .15)',
+  fontWeight: 'normal',
+  fontSize: 20,
+})
 </script>
 
 <style>
-body {
+* {
+  padding: 0;
   margin: 0;
+  list-style: none;
+  text-decoration: none;
 }
-
-#app {
+div.routerView {
   width: 100vw;
   height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: #ffffff;
+  position: relative;
 }
 </style>

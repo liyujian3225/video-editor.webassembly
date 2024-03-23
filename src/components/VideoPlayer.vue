@@ -63,7 +63,6 @@ const convertSecondsToHMS = (seconds) => {
 .video-player-container {
   width: 100%;
   height: 422px;
-  background: #202020;
   display: flex;
   flex-direction: column;
   align-items: center;
