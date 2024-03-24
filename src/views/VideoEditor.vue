@@ -7,6 +7,7 @@
           <input
             class="upload-input"
             type="file"
+            accept="video/*"
             ref="videoInputElement"
             @change="addVideoOnCurrentSection($event)"
           />
@@ -16,13 +17,17 @@
       </div>
 
       <div class="button-container">
-        <el-button>上传音乐</el-button>
-        <el-button>清空音乐</el-button>
-      </div>
-
-      <div class="button-container">
-        <el-button>上传配音</el-button>
-        <el-button>清空配音</el-button>
+        <div class="upload-btn-container">
+          <input
+            class="upload-input"
+            type="file"
+            accept="audio/*"
+            ref="audioInputElement"
+            @change="addAudioOnCurrentSection($event)"
+          />
+          <el-button>上传配音</el-button>
+        </div>
+        <el-button @click="clearAudio">清空配音</el-button>
       </div>
     </section>
 
@@ -158,6 +163,23 @@ const clearVideo = () => {
     fitFrameWidth
   );
 };
+
+let audioObj = null;
+const addAudioOnCurrentSection = (e) => {
+  const file = e.target.files[0];
+  const src = URL.createObjectURL(file)
+  audioObj = new Audio(src);
+  audioObj.addEventListener("canplaythrough", (event) => {
+    /* 音频可以播放；如果权限允许则播放 */
+    audioObj.play();
+  });
+}
+
+const clearAudio = () => {
+  if (audioObj) {
+    audioObj.src = null;
+  }
+}
 
 // 初始化：时间轴组件的宽度
 timeLineContainer_width.value = Mapping.calcTimeLineContainerWidth(
