@@ -17,6 +17,10 @@
       </div>
 
       <div class="button-container">
+        <el-button @click="drawer = true">视频当前参数</el-button>
+      </div>
+
+      <div class="button-container">
         <div class="upload-btn-container">
           <input
             class="upload-input"
@@ -36,29 +40,34 @@
 
     <!-- 底部时间轴 -->
     <time-line></time-line>
+
+    <el-drawer
+      v-model="drawer"
+      title="页面相关信息"
+      :with-header="false">
+      <div class="screenInfo">
+        <div class="title">屏幕信息</div>
+        <div>时间轴容器宽度 timeLineContainer_width：{{ timeLineContainer_width }}</div>
+        <div>时间轴宽度 timeLine_width：{{ timeLine_width }}</div>
+        <div>时间刻度尺宽度 timescale_width：{{ timescale_width }}</div>
+        <div>时间轴左偏移量 timeLineOffsetLeft：{{ timeLineOffsetLeft }}</div>
+
+        <div class="title">时间轴刻度信息</div>
+        <div>格子宽度 gridWidth：{{ gridWidth }}</div>
+        <div>格子内帧数 gridFrame：{{ gridFrame }}</div>
+        <div>每组格子内帧数 groupGridFrame：{{ groupGridFrame }}</div>
+
+        <div class="title">帧宽度信息</div>
+        <div>当前帧宽度 frameWidth：{{ frameWidth }}</div>
+        <div>合适帧宽度 fitFrameWidth：{{ fitFrameWidth }}</div>
+        <div>最小帧宽度 frameWidth：{{ minFrameWidth }}</div>
+        <div>最大帧宽度 frameWidth：{{ maxFrameWidth }}</div>
+        <div>素材的最大帧数 maxFrameOfMaterial：{{ maxFrameOfMaterial }}</div>
+      </div>
+    </el-drawer>
+
   </div>
 
-<!--  <div class="info-container">-->
-<!--    <div class="title">屏幕信息</div>-->
-<!--    <div>-->
-<!--      时间轴容器宽度 timeLineContainer_width：{{ timeLineContainer_width }}-->
-<!--    </div>-->
-<!--    <div>时间轴宽度 timeLine_width：{{ timeLine_width }}</div>-->
-<!--    <div>时间刻度尺宽度 timescale_width：{{ timescale_width }}</div>-->
-<!--    <div>时间轴左偏移量 timeLineOffsetLeft：{{ timeLineOffsetLeft }}</div>-->
-
-<!--    <div class="title">时间轴刻度信息</div>-->
-<!--    <div>格子宽度 gridWidth：{{ gridWidth }}</div>-->
-<!--    <div>格子内帧数 gridFrame：{{ gridFrame }}</div>-->
-<!--    <div>每组格子内帧数 groupGridFrame：{{ groupGridFrame }}</div>-->
-
-<!--    <div class="title">帧宽度信息</div>-->
-<!--    <div>当前帧宽度 frameWidth：{{ frameWidth }}</div>-->
-<!--    <div>合适帧宽度 fitFrameWidth：{{ fitFrameWidth }}</div>-->
-<!--    <div>最小帧宽度 frameWidth：{{ minFrameWidth }}</div>-->
-<!--    <div>最大帧宽度 frameWidth：{{ maxFrameWidth }}</div>-->
-<!--    <div>素材的最大帧数 maxFrameOfMaterial：{{ maxFrameOfMaterial }}</div>-->
-<!--  </div>-->
 </template>
 
 <script setup>
@@ -70,6 +79,8 @@ import Mapping from "@/map";
 import Api from "@/api";
 import { VideoEditor } from "@/viewmodels";
 import WASM from "@/wasm";
+
+const drawer = ref(false)
 
 // 核心数据
 const coreData = inject(Store.coreData);
@@ -211,17 +222,14 @@ window.onresize = () =>
   margin: auto;
 }
 
-.info-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  display: flex;
-  flex-direction: column;
-  color: #efefef;
-  font-size: 14px;
-  .title {
-    font-weight: bold;
-    margin: 15px;
+.screenInfo {
+  div {
+    font-size: 20px;
+    &.title {
+      font-size: 24px;
+      font-weight: bold;
+      margin: 20px 0;
+    }
   }
 }
 
