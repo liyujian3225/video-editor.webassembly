@@ -43,7 +43,7 @@
 
     <el-drawer
       v-model="drawer"
-      title="页面相关信息"
+      title="视频相关信息"
       :with-header="false">
       <div class="screenInfo">
         <div class="title">屏幕信息</div>
